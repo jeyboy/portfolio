@@ -1,0 +1,64 @@
+/* Original articulated SVG. Every state uses the same continuous geometry. */
+.cat-character { display: block; width: 100%; height: 100%; border: 0; border-radius: 12px; padding: 0; background: transparent; cursor: pointer; touch-action: manipulation; }
+.cat-character:disabled { cursor: default; }
+.cat-character:disabled .cat-rig * { animation: none !important; }
+.cat-rig { display: block; width: 100%; height: 100%; overflow: visible; --look-x: 0px; --look-y: 0px; --head-look: 0deg; }
+.cat-rig g { transform-box: view-box; }
+.cat-posture, .cat-breath { transform-origin: 106px 188px; }
+.cat-posture { transition: transform .8s cubic-bezier(.22,.75,.25,1); }
+.cat-breath { animation: cat-breathing 4.2s ease-in-out infinite; }
+.cat-tail-position, .cat-tail-sway { transform-origin: 122px 173px; }
+.cat-tail-position { transition: transform .9s ease; }
+.cat-tail-sway { animation: cat-tail 4.7s ease-in-out infinite; }
+.cat-head-position, .cat-head-idle { transform-origin: 106px 108px; }
+.cat-head-position { transform: rotate(var(--head-look)); transition: transform .65s cubic-bezier(.22,.75,.25,1); }
+.cat-head-idle { animation: cat-head 6.8s ease-in-out infinite; }
+.cat-ear-left { transform-origin: 78px 61px; animation: cat-ear 8.2s ease-in-out infinite; }
+.cat-ear-right { transform-origin: 136px 61px; animation: cat-ear 8.2s 1.1s ease-in-out infinite; }
+.cat-eye-blink { transform-origin: 106px 80px; animation: cat-blink 5.4s ease-in-out infinite; }
+.cat-eye-open, .cat-eye-closed { transition: opacity .4s ease; }
+.cat-eye-closed { opacity: 0; }
+.cat-gaze { transform: translate(var(--look-x), var(--look-y)); transition: transform .18s ease-out; }
+.cat-wave-position, .cat-wave-motion { transform-origin: 126px 133px; }
+.cat-wave-position { transition: transform .65s cubic-bezier(.22,.75,.25,1); }
+.cat-paw-pad { opacity: 0; transition: opacity .3s ease; }
+.cat-character[data-cat-state="watch"] .cat-head-position { transform: translate(0,-2px) rotate(calc(-7deg + var(--head-look))); }
+.cat-character[data-cat-state="stretch"] .cat-posture { transform: scale(.96,1.07); }
+.cat-character[data-cat-state="stretch"] .cat-head-position { transform: translate(0,-5px) rotate(-4deg); }
+.cat-character[data-cat-state="stretch"] .cat-eye-open { opacity: 0; }
+.cat-character[data-cat-state="stretch"] .cat-eye-closed { opacity: 1; }
+.cat-character[data-cat-state="sleep"] .cat-posture { transform: scale(1.035,.92); }
+.cat-character[data-cat-state="sleep"] .cat-head-position { transform: translate(3px,11px) rotate(10deg); }
+.cat-character[data-cat-state="sleep"] .cat-tail-position { transform: rotate(17deg); }
+.cat-character[data-cat-state="sleep"] .cat-eye-open, .cat-character[data-cat-state="blink"] .cat-eye-open { opacity: 0; }
+.cat-character[data-cat-state="sleep"] .cat-eye-closed, .cat-character[data-cat-state="blink"] .cat-eye-closed { opacity: 1; }
+.cat-character[data-cat-state="sleep"] .cat-head-idle, .cat-character[data-cat-state="sleep"] .cat-tail-sway, .cat-character[data-cat-state="sleep"] .cat-ear-left, .cat-character[data-cat-state="sleep"] .cat-ear-right { animation-play-state: paused; }
+.cat-character[data-cat-state="wave"] .cat-wave-position { transform: rotate(-122deg); }
+.cat-character[data-cat-state="wave"] .cat-wave-motion { animation: cat-wave .7s .55s ease-in-out 3; }
+.cat-character[data-cat-state="wave"] .cat-paw-pad { opacity: 1; }
+.cat-character[data-cat-state="wave"] .cat-head-position { transform: rotate(-6deg); }
+.cat-character.is-cat-stopped .cat-rig * { animation-play-state: paused !important; }
+.cat-character.is-cat-calm .cat-rig * { animation: none !important; transition: none !important; }
+.hero-companion { display: flex; align-items: flex-end; justify-content: center; position: relative; height: 12rem; }
+.hero-companion .cat-character { width: 13.2rem; height: 12.6rem; margin-bottom: -.55rem; }
+.cat-motion-toggle { position: absolute; right: 0; bottom: .25rem; border: 0; background: transparent; color: var(--muted); font-size: .875rem; min-height: 44px; padding: .4rem; cursor: pointer; }
+.cat-motion-toggle:hover { color: var(--teal); }
+.contact-section { position: relative; margin-top: 1.5rem; }
+.contact-ledge { position: absolute; top: -2px; left: 0; right: 0; height: 0; pointer-events: none; }
+.contact-companion { position: absolute; right: 2rem; top: 0; width: clamp(12.5rem, 23vw, 17.5rem); aspect-ratio: 30 / 17; transform: translateY(-65.882353%); }
+.cat-character--resting { cursor: default; pointer-events: none; border-radius: 0; }
+.sleeping-breath { transform-origin: 184px 112px; }
+.cat-character--resting.is-cat-ready .sleeping-breath { animation: sleeping-breath 6.8s ease-in-out infinite; }
+.sleep-motion-toggle { position: absolute; right: 0; top: 77%; padding: .35rem .5rem; min-height: 44px; color: #b9dce2; font-size: .8125rem; border: 0; background: transparent; cursor: pointer; pointer-events: auto; }
+.sleep-motion-toggle:hover { color: #fff; }
+.sleep-motion-toggle:focus-visible { outline-color: #a2f0d7; }
+@keyframes sleeping-breath { 0%,100% { transform: scale(1,1); } 50% { transform: scale(1.005,1.026); } }
+@keyframes cat-breathing { 0%,100% { transform: scale(1,1); } 50% { transform: scale(1.014,.984); } }
+@keyframes cat-tail { 0%,100% { transform: rotate(-7deg); } 50% { transform: rotate(10deg); } }
+@keyframes cat-head { 0%,100% { transform: rotate(0deg); } 35% { transform: rotate(1.8deg); } 70% { transform: rotate(-1.3deg); } }
+@keyframes cat-ear { 0%,73%,83%,100% { transform: rotate(0deg); } 77% { transform: rotate(-8deg); } 80% { transform: rotate(3deg); } }
+@keyframes cat-blink { 0%,41%,47%,85%,91%,100% { transform: scaleY(1); } 44%,88% { transform: scaleY(.045); } }
+@keyframes cat-wave { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(15deg); } }
+@media (prefers-reduced-motion: reduce) { .cat-rig * { animation: none !important; transition: none !important; } }
+@media (max-width: 620px) { .hero-companion { height: 10.5rem; }.hero-companion .cat-character { width: 12rem; height: 11.45rem; }.contact-companion { right: 0; width: 12.5rem; }.sleep-motion-toggle { font-size: .75rem; } }
+@media print { .hero-companion, .contact-ledge { display: none; }.contact-section { margin-top: 0; } }

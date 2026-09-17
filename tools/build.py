@@ -41,6 +41,13 @@ PAGES = {
         'title': 'Page Not Found | Yevhen Boiko',
         'description': 'This page could not be found. Return to the portfolio of Yevhen Boiko, Solution Architect and hands-on engineering leader.',
     },
+    'motion-lab.html': {
+        'source': 'motion-lab.html',
+        'title': 'Прототипы анимации | Yevhen Boiko',
+        'description': 'Три работающих прототипа для портфолио: схема обработки, схема с котиком и анимированные значки технологий.',
+        'language': 'ru',
+        'noindex': True,
+    },
 }
 
 template = (ROOT / 'src' / 'template.html').read_text(encoding='utf-8')
@@ -48,6 +55,20 @@ fragments = {
     key: (ROOT / 'src' / filename).read_text(encoding='utf-8')
     for key, filename in [('WORKFLOW', 'workflow.html'), ('IMPORT_MODEL', 'import-model.html'), ('CONTACT', 'contact.html')]
 }
+scene = (ROOT / 'src' / 'motion-scene.html').read_text(encoding='utf-8')
+cat_svg = (ROOT / 'src' / 'cat.svg').read_text(encoding='utf-8')
+sleeping_cat_svg = (ROOT / 'src' / 'cat-sleeping.svg').read_text(encoding='utf-8')
+fragments['CONTACT'] = fragments['CONTACT'].replace('{{SLEEPING_CAT}}', sleeping_cat_svg)
+cat_rig = '<button class="cat-character" type="button" data-cat-rig aria-label="Say hello to the cat" disabled>' + cat_svg + '</button>'
+def motion_scene(cat=False, autoplay=False):
+    return scene.replace('{{CAT}}', str(cat).lower()).replace('{{AUTOPLAY}}', str(autoplay).lower()).replace('{{CAT_RIG}}', cat_rig if cat else '')
+fragments.update({
+    'CAT_RIG': cat_rig,
+    'TECH_ICONS': (ROOT / 'src' / 'tech-icons.html').read_text(encoding='utf-8'),
+    'FLOW_ONLY': motion_scene(),
+    'FLOW_CAT': motion_scene(cat=True),
+})
+fragments['WORKFLOW'] = fragments['WORKFLOW'].replace('{{WORKFLOW_MOTION}}', motion_scene(autoplay=True))
 person = {
     '@context': 'https://schema.org', '@type': 'Person',
     'name': CONFIG['name'], 'alternateName': CONFIG['alternate_name'],
@@ -65,9 +86,10 @@ for filename, metadata in PAGES.items():
     extra_head = ''
     if filename == 'index.html':
         extra_head = '<script type="application/ld+json">' + json.dumps(person, ensure_ascii=False).replace('<', '\\u003c') + '</script>'
-    if filename == '404.html':
+    if filename == '404.html' or metadata.get('noindex'):
         extra_head = '<meta name="robots" content="noindex">'
     fields = {
+        'LANG': metadata.get('language', 'en'),
         'TITLE': escape(metadata['title']),
         'DESCRIPTION': escape(metadata['description'], quote=True),
         'CANONICAL': escape(canonical, quote=True),
@@ -93,7 +115,7 @@ for filename, metadata in PAGES.items():
     assert not re.search(r'\{\{[A-Z_]+\}\}', document), f'Unresolved template value in {filename}'
     (ROOT / filename).write_text(document, encoding='utf-8')
 
-urls = '\n'.join('  <url><loc>' + escape(BASE if filename == 'index.html' else urljoin(BASE, filename)) + '</loc></url>' for filename in PAGES if filename != '404.html')
+urls = '\n'.join('  <url><loc>' + escape(BASE if filename == 'index.html' else urljoin(BASE, filename)) + '</loc></url>' for filename, metadata in PAGES.items() if filename != '404.html' and not metadata.get('noindex'))
 (ROOT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + '\n</urlset>\n', encoding='utf-8')
 (ROOT / 'robots.txt').write_text('User-agent: *\nAllow: /\n\nSitemap: ' + urljoin(BASE, 'sitemap.xml') + '\n', encoding='utf-8')
 (ROOT / '.nojekyll').touch()

@@ -1,21 +1,5 @@
-<figure class="workflow" id="workflow" aria-labelledby="workflow-caption">
-            <div class="workflow-heading"><span class="mono">01 / execution flow</span><span class="workflow-label">Architecture sketch</span></div>
-            <ol class="flow-main">
-              <li><span class="node-order">01</span><strong>Input</strong><span>Client context</span></li>
-              <li><span class="node-order">02</span><strong>Model request</strong><span>Initial analysis</span></li>
-              <li><span class="node-order">03</span><strong>Validate</strong><span>Model + format checks</span></li>
-            </ol>
-            <div class="flow-divider"><span>Validated output feeds parallel requests</span><span aria-hidden="true">↓</span></div>
-            <div class="flow-branches" aria-label="Illustrative parallel branches">
-              <div class="branch"><span>Branch A</span><strong><span class="branch-dot" aria-hidden="true"></span>Complete</strong></div>
-              <div class="branch"><span>Branch B</span><strong><span class="branch-dot" aria-hidden="true"></span>Complete</strong></div>
-              <div class="branch" id="retry-branch"><span>Branch C</span><strong><span class="branch-dot" aria-hidden="true"></span><span id="branch-status">Complete</span></strong></div>
-            </div>
-            <div class="flow-result"><span aria-hidden="true">↓</span><span>Check each answer · Format · Summarize</span><strong class="mono" id="flow-output">{ JSON }</strong></div>
-            <div class="retry-note" id="retry-note" role="status" hidden><strong>Resume the failed request.</strong> Retry with the same model, adjust its parameters, or switch models. Completed requests stay complete; the final output waits for validation.</div>
-            <div class="workflow-bottom">
-              <span><span class="state-symbol" aria-hidden="true">⊙</span> Request states + execution tree stored in the database</span>
-              <button class="workflow-toggle" id="retry-toggle" type="button" aria-pressed="false" aria-controls="retry-note retry-branch" hidden>Show retry path <span aria-hidden="true">↗</span></button>
-            </div>
-            <figcaption id="workflow-caption">Simplified flow with illustrative branch states. The saved execution tree made problematic branches inspectable and recoverable.</figcaption>
-          </figure>
+<figure class="workflow-demo" id="workflow" aria-labelledby="workflow-caption">
+  {{WORKFLOW_MOTION}}
+  <div class="workflow-state-note"><strong>Recovery at the request level.</strong> Retry the same model, adjust its parameters, or switch models. Completed results remain available while the failed request runs again.</div>
+  <figcaption id="workflow-caption">Illustrative flow: client input, model response, cross-model and format checks, parallel processing, and JSON output. Request states and the execution tree are stored in the database so problematic branches can be inspected and recovered.</figcaption>
+</figure>

@@ -1,0 +1,26 @@
+<div class="motion-scene" data-motion data-autoplay="{{AUTOPLAY}}" data-cat="{{CAT}}">
+  <div class="motion-heading"><span class="mono">request → result</span><span class="motion-caption">Workflow illustration</span></div>
+  <div class="motion-graph" role="group" aria-label="Model request, validation, three parallel branches and JSON output">
+    <svg class="motion-wires" viewBox="0 0 1000 650" preserveAspectRatio="none" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M25 110H170 M290 110H740"/>
+        <path d="M810 165V230H180V290 M810 230H500V290 M810 230H820V290"/>
+        <path d="M180 390V470H780V520 M500 390V470 M820 390V470H780"/>
+        <path class="motion-retry-wire" d="M910 340H955V250H820V290"/>
+      </g>
+      <g class="motion-packets" fill="#08766c"><circle r="10" data-packet="0"/><circle r="10" data-packet="1"/><circle r="10" data-packet="2"/></g>
+    </svg>
+    <div class="motion-node node-request" data-node="request"><span>01</span><strong>Request</strong></div>
+    <div class="motion-node node-validate" data-node="validate"><span>02</span><strong>Validate</strong></div>
+    <div class="motion-branch branch-a" data-branch="0"><strong>Branch A</strong><span data-branch-status="0">Ready</span></div>
+    <div class="motion-branch branch-b" data-branch="1"><strong>Branch B</strong><span data-branch-status="1">Ready</span></div>
+    <div class="motion-branch branch-c" data-branch="2"><strong>Branch C</strong><span data-branch-status="2">Ready</span></div>
+    <div class="motion-output" data-output><span>Validated output</span><strong>{ JSON }</strong></div>
+    <div class="motion-floor" aria-hidden="true"></div>
+    <div class="motion-cat" data-cat-area>{{CAT_RIG}}</div>
+  </div>
+  <div class="motion-readout"><span class="motion-step" data-step>01 / 08</span><p data-motion-status>One request, checked at every step.</p></div>
+  <div class="motion-progress" aria-hidden="true"><span data-progress></span></div>
+  <div class="motion-controls" hidden><button type="button" data-action="play">Play</button><button type="button" data-action="pause" disabled>Pause</button><button type="button" data-action="calm" aria-pressed="false">Calm mode</button></div>
+  <p class="sr-only" data-motion-announcement role="status" aria-live="polite"></p>
+</div>

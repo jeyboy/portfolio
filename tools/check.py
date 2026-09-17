@@ -50,7 +50,7 @@ class Page(HTMLParser):
 
 
 pages = {path.name: Page(path.read_text(encoding='utf-8')) for path in ROOT.glob('*.html')}
-assert len(pages) == 6, f'Expected six built pages; got {len(pages)}'
+assert len(pages) == 7, f'Expected six portfolio pages and a motion lab; got {len(pages)}'
 checked = 0
 for name, page in pages.items():
     assert page.h1 == page.main == 1, f'{name}: expected one h1 and one main'
