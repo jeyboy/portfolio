@@ -42,16 +42,16 @@
 .hero-companion { display: flex; align-items: flex-end; justify-content: center; position: relative; height: 12rem; }
 .hero-companion .cat-character { width: 13.2rem; height: 12.6rem; margin-bottom: -.55rem; }
 .cat-motion-toggle { position: absolute; right: 0; bottom: .25rem; border: 0; background: transparent; color: var(--muted); font-size: .875rem; min-height: 44px; padding: .4rem; cursor: pointer; }
-.cat-motion-toggle:hover { color: var(--teal); }
+.cat-motion-toggle:hover { color: var(--accent); }
 .contact-section { position: relative; margin-top: 1.5rem; }
 .contact-ledge { position: absolute; top: -2px; left: 0; right: 0; height: 0; pointer-events: none; }
 .contact-companion { position: absolute; right: 2rem; top: 0; width: clamp(12.5rem, 23vw, 17.5rem); aspect-ratio: 30 / 17; transform: translateY(-65.882353%); }
 .cat-character--resting { cursor: default; pointer-events: none; border-radius: 0; }
 .sleeping-breath { transform-origin: 184px 112px; }
 .cat-character--resting.is-cat-ready .sleeping-breath { animation: sleeping-breath 6.8s ease-in-out infinite; }
-.sleep-motion-toggle { position: absolute; right: 0; top: 77%; padding: .35rem .5rem; min-height: 44px; color: #b9dce2; font-size: .8125rem; border: 0; background: transparent; cursor: pointer; pointer-events: auto; }
+.sleep-motion-toggle { position: absolute; right: 0; top: 77%; padding: .35rem .5rem; min-height: 44px; color: #c5d9f4; font-size: .8125rem; border: 0; background: transparent; cursor: pointer; pointer-events: auto; }
 .sleep-motion-toggle:hover { color: #fff; }
-.sleep-motion-toggle:focus-visible { outline-color: #a2f0d7; }
+.sleep-motion-toggle:focus-visible { outline-color: #b9e2f7; }
 @keyframes sleeping-breath { 0%,100% { transform: scale(1,1); } 50% { transform: scale(1.005,1.026); } }
 @keyframes cat-breathing { 0%,100% { transform: scale(1,1); } 50% { transform: scale(1.014,.984); } }
 @keyframes cat-tail { 0%,100% { transform: rotate(-7deg); } 50% { transform: rotate(10deg); } }

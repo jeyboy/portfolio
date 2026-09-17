@@ -130,7 +130,7 @@
         if (path) {
           const point = model.pointOnPath(path, state.fraction);
           packet.setAttribute('cx', point[0]); packet.setAttribute('cy', point[1]);
-          packet.setAttribute('fill', state.id === 'retry' ? '#9b660f' : '#08766c');
+          packet.setAttribute('fill', state.id === 'retry' ? '#9b660f' : '#4c50a6');
         }
       });
       this.play.textContent = this.isCalm() ? 'Next step' : this.clock.running ? 'Restart' : time >= model.duration ? 'Replay' : time > 0 ? 'Resume' : 'Play';

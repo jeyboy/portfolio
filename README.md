@@ -87,6 +87,12 @@ up to ten minutes to appear.
 
 ## Edit the content
 
+The site uses the **Indigo Blue** CV palette: `#4C50A6` for primary accents,
+with a gradient from `#474096` through `#477ACD` to `#93DCE7`. These colors
+were sampled from the approved Indigo Blue CV; supporting surfaces and dark
+backgrounds use related indigo/blue shades. Theme variables live in `:root`
+in `styles.css`. The cats keep their sky-blue `#8FCFF5` eyes.
+
 - **Homepage content:** `src/home.html`.
 - **Full case studies and experience:** the corresponding files in `src/`.
 - **Shared header/footer and metadata markup:** `src/template.html`.
