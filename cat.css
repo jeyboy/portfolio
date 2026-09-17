@@ -47,12 +47,89 @@
 .contact-ledge { position: absolute; top: -2px; left: 0; right: 0; height: 0; pointer-events: none; }
 .contact-companion { position: absolute; right: 2rem; top: 0; width: clamp(12.5rem, 23vw, 17.5rem); aspect-ratio: 30 / 17; transform: translateY(-65.882353%); }
 .cat-character--resting { cursor: default; pointer-events: none; border-radius: 0; }
-.sleeping-breath { transform-origin: 184px 112px; }
-.cat-character--resting.is-cat-ready .sleeping-breath { animation: sleeping-breath 6.8s ease-in-out infinite; }
+/* Translation avoids rescaling the silhouette on each frame. All breathing
+   layers share a phase; the resting paws and tail stay on their support. */
+.sleeping-head-rest { transform-origin: 83px 109px; }
+.cat-character--resting.is-cat-ready .sleeping-chest { animation: sleeping-chest 7.2s ease-in-out infinite; }
+.cat-character--resting.is-cat-ready .sleeping-shoulder { animation: sleeping-shoulder 7.2s ease-in-out infinite; }
+.cat-character--resting.is-cat-ready .sleeping-head-rest { animation: sleeping-head-rest 7.2s ease-in-out infinite; }
 .sleep-motion-toggle { position: absolute; right: 0; top: 77%; padding: .35rem .5rem; min-height: 44px; color: #c5d9f4; font-size: .8125rem; border: 0; background: transparent; cursor: pointer; pointer-events: auto; }
 .sleep-motion-toggle:hover { color: #fff; }
 .sleep-motion-toggle:focus-visible { outline-color: #b9e2f7; }
-@keyframes sleeping-breath { 0%,100% { transform: scale(1,1); } 50% { transform: scale(1.005,1.026); } }
+@keyframes sleeping-chest { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-1.8px); } }
+@keyframes sleeping-shoulder { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-.65px); } }
+@keyframes sleeping-head-rest { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(-.35deg); } }
+
+/* Small, non-interactive companions share pause and visibility handling. */
+.cat-character--decorative { cursor: default; pointer-events: none; border-radius: 0; height: auto; }
+.section-companion { width: 11rem; max-width: 100%; justify-self: end; align-self: center; text-align: right; }
+.section-companion .cat-rig { height: auto; }
+.companion-motion-toggle { border: 0; background: transparent; color: var(--muted); font-size: .875rem; min-height: 44px; padding: .35rem .5rem; cursor: pointer; }
+.companion-motion-toggle:hover { color: var(--accent); }
+.section-heading--with-cat { grid-template-columns: 15rem minmax(0,1fr) 11rem; column-gap: 2rem; align-items: center; }
+.section-heading--with-cat > .eyebrow { align-self: start; }
+.section-heading--with-cat > div:not(.section-companion) { min-width: 0; }
+.experience-heading-with-cat { display: grid; grid-template-columns: minmax(0,1fr) 13rem; align-items: center; gap: 2rem; }
+.experience-heading-with-cat h1 { min-width: 0; }
+.experience-heading-with-cat .section-companion { width: 13rem; margin-top: 1rem; }
+.thought-head { transform-origin: 106px 174px; transform: rotate(-5deg); }
+.thought-paw { transform-origin: 131px 210px; }
+.thought-tail { transform-origin: 120px 228px; }
+.thought-eyes, .typing-eyes { transform-origin: 106px 80px; }
+.thought-icon--gear, .thought-icon--code { opacity: 0; }
+.typing-head { transform-origin: 136px 115px; }
+.cat-character.is-cat-ready .thought-head { animation: thought-head 8.4s ease-in-out infinite; }
+.cat-character.is-cat-ready .thought-paw { animation: thought-paw 8.4s ease-in-out infinite; }
+.cat-character.is-cat-ready .thought-eyes { animation: companion-blink 7.1s ease-in-out infinite; }
+.cat-character.is-cat-ready .thought-icon--diagram { animation: thought-diagram 12s ease-in-out infinite; }
+.cat-character.is-cat-ready .thought-icon--gear { animation: thought-gear 12s ease-in-out infinite; }
+.cat-character.is-cat-ready .thought-icon--code { animation: thought-code 12s ease-in-out infinite; }
+.cat-character.is-cat-ready .typing-paw--left { animation: typing-left 8s ease-in-out infinite; }
+.cat-character.is-cat-ready .typing-paw--right { animation: typing-right 8s ease-in-out infinite; }
+.cat-character.is-cat-ready .typing-key-left { animation: typing-key-left 8s ease-in-out infinite; }
+.cat-character.is-cat-ready .typing-key-right { animation: typing-key-right 8s ease-in-out infinite; }
+.cat-character.is-cat-ready .typing-head { animation: typing-head 8s ease-in-out infinite; }
+.cat-character.is-cat-ready .typing-eyes { animation: companion-blink 8s ease-in-out infinite; }
+@keyframes thought-head { 0%,100% { transform: rotate(-5deg); } 50% { transform: rotate(-3deg); } }
+@keyframes thought-paw { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(1deg); } }
+@keyframes companion-blink { 0%,55%,61%,100% { transform: scaleY(1); } 58% { transform: scaleY(.08); } }
+@keyframes thought-diagram { 0%,28%,100% { opacity: 1; } 32%,96% { opacity: 0; } }
+@keyframes thought-gear { 0%,28%,64%,100% { opacity: 0; } 32%,60% { opacity: 1; } }
+@keyframes thought-code { 0%,60%,100% { opacity: 0; } 64%,96% { opacity: 1; } }
+@keyframes typing-left { 0%,3%,9%,15%,21%,27%,33%,100% { transform: translateY(0); } 6%,12%,18%,24%,30% { transform: translateY(3px); } }
+@keyframes typing-right { 0%,6%,12%,18%,24%,30%,36%,100% { transform: translateY(0); } 9%,15%,21%,27%,33% { transform: translateY(3px); } }
+@keyframes typing-key-left { 0%,3%,9%,15%,21%,27%,33%,100% { transform: translateY(0); fill: #edf0fb; } 6%,12%,18%,24%,30% { transform: translateY(1px); fill: #93dce7; } }
+@keyframes typing-key-right { 0%,6%,12%,18%,24%,30%,36%,100% { transform: translateY(0); fill: #edf0fb; } 9%,15%,21%,27%,33% { transform: translateY(1px); fill: #93dce7; } }
+@keyframes typing-head { 0%,36%,100% { transform: rotate(0deg); } 48%,82% { transform: rotate(-3deg); } }
+.companion-studies { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--line); }
+.companion-studies article { min-width: 0; display: grid; grid-template-columns: 1fr 11rem; align-items: center; gap: 1rem; }
+.companion-studies h2 { font-size: 1.5rem; margin-block: .5rem .75rem; }
+.companion-studies p { font-size: 1rem; }
+
+@media (max-width: 1100px) {
+  .section-heading--with-cat { grid-template-columns: 12rem minmax(0,1fr) 9rem; column-gap: 1.5rem; }
+  .experience-heading-with-cat { grid-template-columns: minmax(0,1fr) 11rem; gap: 1.5rem; }
+  .companion-studies { gap: 2rem; }
+  .companion-studies article { grid-template-columns: 1fr 9rem; }
+}
+@media (max-width: 850px) {
+  .section-heading--with-cat { grid-template-columns: minmax(0,1fr) 10rem; gap: 1.25rem; }
+  .section-heading--with-cat > .eyebrow { grid-column: 1 / -1; }
+  .section-heading--with-cat > .section-companion { grid-column: 2; grid-row: 2; }
+  .experience-heading-with-cat { grid-template-columns: minmax(0,1fr) 9rem; gap: 1rem; }
+  .companion-studies { grid-template-columns: 1fr; }
+  .companion-studies article { grid-template-columns: 1fr 11rem; }
+}
+@media (max-width: 620px) {
+  .section-heading--with-cat { grid-template-columns: minmax(0,1fr) 7rem; gap: .75rem 1rem; }
+  .section-heading--with-cat > .eyebrow { grid-column: 1; align-self: center; }
+  .section-heading--with-cat > div:not(.section-companion) { grid-column: 1 / -1; grid-row: 2; }
+  .section-heading--with-cat > .section-companion { grid-row: 1; }
+  .experience-heading-with-cat { grid-template-columns: 1fr; gap: .25rem; }
+  .experience-heading-with-cat .section-companion { width: 10rem; margin-top: .25rem; }
+  .companion-studies article { grid-template-columns: minmax(0,1fr) 7.5rem; gap: .75rem; }
+  .companion-motion-toggle { font-size: .875rem; }
+}
 @keyframes cat-breathing { 0%,100% { transform: scale(1,1); } 50% { transform: scale(1.014,.984); } }
 @keyframes cat-tail { 0%,100% { transform: rotate(-7deg); } 50% { transform: rotate(10deg); } }
 @keyframes cat-head { 0%,100% { transform: rotate(0deg); } 35% { transform: rotate(1.8deg); } 70% { transform: rotate(-1.3deg); } }
@@ -61,4 +138,4 @@
 @keyframes cat-wave { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(15deg); } }
 @media (prefers-reduced-motion: reduce) { .cat-rig * { animation: none !important; transition: none !important; } }
 @media (max-width: 620px) { .hero-companion { height: 10.5rem; }.hero-companion .cat-character { width: 12rem; height: 11.45rem; }.contact-companion { right: 0; width: 12.5rem; }.sleep-motion-toggle { font-size: .75rem; } }
-@media print { .hero-companion, .contact-ledge { display: none; }.contact-section { margin-top: 0; } }
+@media print { .hero-companion, .contact-ledge, .section-companion { display: none; }.contact-section { margin-top: 0; }.experience-heading-with-cat { display: block; } }

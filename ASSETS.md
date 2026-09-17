@@ -12,8 +12,13 @@ this vector version. The previous raster atlas has been removed from the site.
 
 The open eyes use sky blue `#8FCFF5`. `src/cat-sleeping.svg` shows the same
 character reclining at the contact-section boundary with one outlined forepaw
-hanging down. Only the torso breathes slowly; this cat does not track the cursor.
-Both SVGs use indigo fur and blue accents coordinated with the Indigo Blue CV.
+hanging down. Its torso, shoulder and head share a slow breathing phase while
+the supported paws and tail remain still. This cat does not track the cursor.
+`src/cat-thinking.svg` uses the same face with a thoughtful pose and a cloud
+containing three crossfading vector symbols: diagram, gear and code window.
+`src/cat-typing.svg` reuses the face above an original keyboard drawing, with
+alternating paw and key movement followed by a resting interval.
+All four SVGs use indigo fur and blue accents coordinated with the Indigo Blue CV.
 
 ## Technology logos
 

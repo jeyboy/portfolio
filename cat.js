@@ -7,15 +7,17 @@
     constructor(button) {
       this.el = button; this.svg = button.querySelector('svg');
       this.resting = button.hasAttribute('data-cat-resting');
+      this.variant = button.dataset.catVariant || (this.resting ? 'sleeping' : 'interactive');
+      this.decorative = this.variant !== 'interactive';
       this.abort = new AbortController(); this.baseState = this.resting ? 'sleep' : 'idle'; this.override = false;
       this.manualPaused = false; this.scenePaused = Boolean(button.closest('[data-motion]'));
       this.sceneCalm = false; this.inView = !('IntersectionObserver' in window);
       this.timer = null; this.lookFrame = null; this.pointer = null;
       this.toggle = button.closest('[data-cat-area]')?.querySelector('[data-cat-toggle]');
-      if (!this.resting) button.disabled = false;
+      if (!this.decorative) button.disabled = false;
       button.classList.add('is-cat-ready');
       const options = { signal: this.abort.signal };
-      if (!this.resting) {
+      if (!this.decorative) {
         button.addEventListener('click', () => this.preview('wave', 2900), options);
         document.addEventListener('pointermove', (event) => {
           if (event.pointerType === 'touch') return;
@@ -41,15 +43,16 @@
       if ('IntersectionObserver' in window) {
         this.observer = new IntersectionObserver((entries) => {
           this.inView = entries[0].isIntersecting; this.sync();
-        }, { threshold: .05 });
-        this.observer.observe(button);
+        }, { threshold: 0 });
+        // Observe the stable layout box, never an animated SVG body part.
+        this.observer.observe(button.closest('[data-cat-area]') || button);
       }
       button.dataset.catState = this.baseState;
       this.sync();
     }
     calm() { return reduced.matches || this.sceneCalm; }
     scheduleLook() {
-      if (!this.pointer || this.resting || this.calm() || this.lookFrame !== null || this.el.classList.contains('is-cat-stopped') || this.el.dataset.catState === 'sleep') return;
+      if (!this.pointer || this.decorative || this.calm() || this.lookFrame !== null || this.el.classList.contains('is-cat-stopped') || this.el.dataset.catState === 'sleep') return;
       this.lookFrame = requestAnimationFrame(() => {
         this.lookFrame = null;
         if (!this.pointer || this.calm() || this.el.classList.contains('is-cat-stopped') || this.el.dataset.catState === 'sleep') return;
@@ -94,7 +97,8 @@
       if (this.toggle) {
         this.toggle.disabled = reduced.matches;
         this.toggle.textContent = reduced.matches ? 'Calm mode' : this.manualPaused ? 'Resume cat' : 'Pause cat';
-        this.toggle.setAttribute('aria-label', reduced.matches ? 'Reduced motion is enabled' : `${this.manualPaused ? 'Resume' : 'Pause'} ${this.resting ? 'sleeping ' : ''}cat animation`);
+        const label = this.decorative ? `${this.variant} cat` : 'cat';
+        this.toggle.setAttribute('aria-label', reduced.matches ? `Reduced motion is enabled for the ${label}` : `${this.manualPaused ? 'Resume' : 'Pause'} ${label} animation`);
         this.toggle.setAttribute('aria-pressed', String(this.manualPaused || reduced.matches));
       }
     }

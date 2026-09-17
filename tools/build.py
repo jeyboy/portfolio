@@ -60,10 +60,17 @@ cat_svg = (ROOT / 'src' / 'cat.svg').read_text(encoding='utf-8')
 sleeping_cat_svg = (ROOT / 'src' / 'cat-sleeping.svg').read_text(encoding='utf-8')
 fragments['CONTACT'] = fragments['CONTACT'].replace('{{SLEEPING_CAT}}', sleeping_cat_svg)
 cat_rig = '<button class="cat-character" type="button" data-cat-rig aria-label="Say hello to the cat" disabled>' + cat_svg + '</button>'
+def companion(variant, filename):
+    svg = (ROOT / 'src' / filename).read_text(encoding='utf-8')
+    return ('<div class="section-companion section-companion--' + variant + '" data-cat-area>'
+            '<div class="cat-character cat-character--decorative" data-cat-rig data-cat-variant="' + variant + '" aria-hidden="true">' + svg + '</div>'
+            '<button class="companion-motion-toggle" type="button" data-cat-toggle aria-label="Pause ' + variant + ' cat animation" aria-pressed="false" hidden>Pause cat</button></div>')
 def motion_scene(cat=False, autoplay=False):
     return scene.replace('{{CAT}}', str(cat).lower()).replace('{{AUTOPLAY}}', str(autoplay).lower()).replace('{{CAT_RIG}}', cat_rig if cat else '')
 fragments.update({
     'CAT_RIG': cat_rig,
+    'THINKING_CAT': companion('thinking', 'cat-thinking.svg'),
+    'TYPING_CAT': companion('typing', 'cat-typing.svg'),
     'TECH_ICONS': (ROOT / 'src' / 'tech-icons.html').read_text(encoding='utf-8'),
     'FLOW_ONLY': motion_scene(),
     'FLOW_CAT': motion_scene(cat=True),

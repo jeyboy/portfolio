@@ -46,6 +46,8 @@ assets/
 src/                 editable content and shared template
   cat.svg            original vector character, separate moving parts
   cat-sleeping.svg   reclining cat at the contact boundary
+  cat-thinking.svg   thinking cat beside Selected work
+  cat-typing.svg     typing cat on the Experience page
 tools/
   build.py           regenerate the static pages
   check.py           validate files, links, anchors, and metadata
@@ -105,7 +107,8 @@ in `styles.css`. The cats keep their sky-blue `#8FCFF5` eyes.
 - **Animated workflow in ScaleGlide:** `src/workflow.html`,
   `src/motion-scene.html`, `motion.css`,
   `motion-model.js`, and `motion.js`.
-- **SVG cats:** `src/cat.svg`, `src/cat-sleeping.svg`, `cat.css`, and `cat.js`.
+- **SVG cats:** `src/cat.svg`, `src/cat-sleeping.svg`, `src/cat-thinking.svg`,
+  `src/cat-typing.svg`, `cat.css`, and `cat.js`.
 - **Technology icons near the introduction:** `src/tech-icons.html` and
   `.hero-stack` in `motion.css`.
 - **Three motion prototypes:** `src/motion-lab.html`. This review page has
@@ -155,18 +158,29 @@ or paused. Click to wave. Pause cat freezes its idle animations. Offscreen/hidde
 pause automatically, and the device's reduced-motion setting is respected.
 Without JavaScript, the cat is a static vector illustration.
 
-A second SVG cat lies at the top edge of the contact section with one forepaw
-hanging over the boundary. It only breathes slowly, does not track the cursor,
-and has its own pause control. A pale paw outline keeps it visible on the dark
-contact background. Its size adapts to narrow screens.
+A sleeping SVG cat lies at the top edge of the contact section with one forepaw
+hanging over the boundary. Its chest and shoulder move in one continuous
+7.2-second breathing cycle with a small head tilt. The supported paws and tail
+stay still. Translation replaces torso scaling to preserve its proportions.
+It does not track the cursor and has its own pause control. A pale paw outline
+keeps it visible on the dark contact background.
+
+A thinking cat sits beside the Selected work heading. Its thought cloud stays
+still while a diagram, a gear, and a code window crossfade over a 12-second
+cycle. On small phones the cat sits beside the section label, keeping the full
+heading width available for text. A typing cat appears beside the full
+Experience page title. It types for about three seconds, then pauses for five;
+its paws and the corresponding keys move together. Both are decorative, have
+individual pause controls, and respect visibility and reduced-motion settings.
+Visibility is measured on stable companion containers, not moving SVG parts.
 
 The undated “Your team next?” entry comes before current work in the homepage
 timeline and the full Experience page. It links to that page's contact section.
 
 Python, Node.js, and Ruby appear below the homepage introduction and actions.
 Their icons respond to hover, keyboard focus, and tap. `motion-lab.html` keeps
-the separate comparisons, including all six cat states and the workflow with
-the cat. The previous raster pose atlas is no longer used. See `ASSETS.md` for
+the separate comparisons, including all six cat states, the workflow with
+the cat, and the thinking and typing companions. The previous raster pose atlas is no longer used. See `ASSETS.md` for
 source and attribution details.
 
 ## Content notes
@@ -193,7 +207,11 @@ The delivery checks cover all seven pages, cross-page links, local assets, ancho
 and ARIA targets, unique titles, metadata, JavaScript syntax, CSS block structure,
 the sitemap, selected text contrast colors, and ZIP contents. Motion model
 checks cover pause/resume, replay, long-frame recovery, completed-branch
-retention, output ordering, and path endpoints. Actual visual
+retention, output ordering, and path endpoints. The cat controller was also
+checked for manual pause across visibility changes, hidden-tab suspension,
+reduced motion, decorative-cat isolation, and route cleanup. New SVG poses
+were rendered for static visual review, and their loop endpoints and crossfade
+boundaries were checked. Actual visual
 rendering and mobile browser behavior have not been verified in a browser in
 this environment; review the page in your browser before publishing it.
 
