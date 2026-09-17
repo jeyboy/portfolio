@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8f7">
+  <title>OxyDial — Research Software &amp; Numerical Processing | Yevhen Boiko</title>
+  <meta name="description" content="Cloud SaaS delivery and numerical processing for oxygen–hemoglobin equilibrium curve research, with P50/P90 validation and reference comparisons.">
+  <link rel="canonical" href="https://jeyboy.github.io/oxydial.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="OxyDial — Research Software &amp; Numerical Processing | Yevhen Boiko">
+  <meta property="og:description" content="Cloud SaaS delivery and numerical processing for oxygen–hemoglobin equilibrium curve research, with P50/P90 validation and reference comparisons.">
+  <meta property="og:url" content="https://jeyboy.github.io/oxydial.html">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2319364b'/%3E%3Cpath d='M13 48h38' stroke='%2359d0ba' stroke-width='4'/%3E%3Ctext x='32' y='38' text-anchor='middle' font-family='Arial,sans-serif' font-size='25' font-weight='700' fill='white'%3EYB%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="pages.css">
+  <script src="script.js" defer></script>
+  
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="top"><div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="Yevhen Boiko, home"><span class="brand-mark" aria-hidden="true">yb<span>.</span></span><span class="brand-name">Yevhen Boiko</span></a>
+    <nav aria-label="Main navigation"><a href="index.html#work" class="is-active">Work</a><a href="experience.html">Experience</a><a href="#contact">Contact <span aria-hidden="true">↗</span></a></nav>
+  </div></header>
+  <main id="main" tabindex="-1">
+    <section class="page-hero container" aria-labelledby="page-title">
+  <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="index.html#work">Selected work</a><span aria-hidden="true">/</span><span aria-current="page">OxyDial</span></nav>
+  <p class="eyebrow">Case study 03 / Research software</p>
+  <h1 id="page-title">From noisy measurements<br> to a checked result<span class="accent">.</span></h1>
+  <p class="page-intro">A cloud SaaS platform for oxygen–hemoglobin equilibrium curve testing. I led the engineering team, owned the platform architecture and delivery, and developed numerical processing to improve the resulting curves.</p>
+  <dl class="project-facts"><div><dt>My role</dt><dd>Architecture, numerical work<br> &amp; six-person team leadership</dd></div><div><dt>Environment</dt><dd>Research<br> &amp; validation</dd></div><div><dt>Period</dt><dd>Mar 2023 – Nov 2024<br> GlenFlow portfolio</dd></div></dl>
+</section>
+<div class="container article-layout">
+  <aside class="article-nav"><p class="eyebrow">In this case</p><nav aria-label="Case study sections"><a href="#problem">01 / Measurement constraints</a><a href="#method">02 / Numerical work</a><a href="#validation">03 / Validation</a><a href="#platform">04 / Platform &amp; delivery</a></nav><a class="text-link" href="assets/Yevhen_Boiko_CV.pdf" download>Download CV ↓</a></aside>
+  <div class="article-content">
+    <section id="problem" class="article-section" aria-labelledby="problem-title"><p class="case-domain">The problem</p><h2 id="problem-title">A curve is only useful if its result can be checked.</h2><p>The measurement data contained noise and errors that affected the resulting curve. Reagent coefficients also needed to be accounted for. The numerical work therefore had two connected goals: improve accuracy and keep the calculation process practical.</p><p>The target was a sigmoidal representation of the curve. Work on smoothing and reconstruction had to be evaluated against calculated P50 and P90 values, rather than only by how convincing the curve looked on screen.</p></section>
+
+    <section id="method" class="article-section" aria-labelledby="method-title"><p class="case-domain">Numerical processing</p><h2 id="method-title">Smoothing, reconstruction, and iteration tuning.</h2><ol class="scenario-steps"><li><strong>Reduce measurement noise.</strong><span>Smooth the incoming measurements and correct errors affecting the resulting curve.</span></li><li><strong>Account for reagent coefficients.</strong><span>Incorporate these coefficients in the calculations.</span></li><li><strong>Investigate reconstruction methods.</strong><span>Explore Levenberg–Marquardt fitting as part of rebuilding a sigmoidal curve from smoothed measurements.</span></li><li><strong>Tune the calculation process.</strong><span>Adjust iteration counts to accelerate calculation while checking the resulting values.</span></li></ol><div class="architect-note"><span class="eyebrow">Research scope</span><p>Levenberg–Marquardt was an investigated fitting approach. The confirmed result is the numerical processing work and its validation; this case does not claim that the investigated optimizer became the final deployed method.</p></div></section>
+
+    <section id="validation" class="article-section" aria-labelledby="validation-title"><p class="case-domain">How we checked it</p><h2 id="validation-title">Several comparisons, one numerical result.</h2><p>We compared the output with manual calculations, reference results, and other software. The numerical checks focused on deviations in the calculated P50 and P90 values. During research, visual overlays helped us examine how the curves differed.</p><div class="validation-grid"><div><span class="eyebrow">Numerical check</span><h3>P50 / P90</h3><p>Compare deviations in calculated values.</p></div><div><span class="eyebrow">Reference checks</span><h3>Three sources</h3><p>Manual calculations, reference results, and other software.</p></div><div><span class="eyebrow">Research aid</span><h3>Curve overlays</h3><p>Visually inspect the fit and investigate discrepancies.</p></div></div><div class="case-result"><span class="result-marker" aria-hidden="true">↗</span><p><strong>Reduced errors, improved curve accuracy, and faster calculation.</strong> These are qualitative outcomes; no numerical accuracy percentage or runtime benchmark is asserted here.</p></div></section>
+
+    <section id="platform" class="article-section" aria-labelledby="platform-title"><p class="case-domain">Cloud platform &amp; delivery</p><h2 id="platform-title">The numerical work was part of a larger research workflow.</h2><p>I led a six-person engineering team and owned the cloud SaaS architecture and delivery. The platform supported automated device-data ingestion, cloud storage and backup, analytical dashboards, reports, CSV exports, audit trails, and remote research collaboration.</p><div class="platform-map" aria-label="Platform responsibilities"><div><span class="mono">01 / Collect</span><h3>Device data</h3><p>Automated ingestion, storage, and backup.</p></div><div><span class="mono">02 / Analyze</span><h3>Measurements</h3><p>Numerical processing and analytical dashboards.</p></div><div><span class="mono">03 / Review</span><h3>Research results</h3><p>Reports, CSV export, audit trails, and collaboration.</p></div></div><p>The web platform was deployed in the company’s research and validation environment. Its web and numerical-processing components contributed to a broader medical measurement process for which the company filed a patent application.</p><ul class="tech-list" aria-label="Focus areas"><li>Cloud SaaS</li><li>Device-data ingestion</li><li>Numerical processing</li><li>Research collaboration</li><li>Audit trails</li></ul></section>
+    <nav class="next-case" aria-label="Continue exploring"><a href="cor-finance.html"><span>Previous case study</span><strong>← COR-Software</strong></a><a href="experience.html"><span>Keep exploring</span><strong>Full experience →</strong></a></nav>
+  </div>
+</div>
+
+    <section class="contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="container contact-inner">
+        <div><p class="eyebrow">04 / Get in touch</p><h2 id="contact-title">Have a system<br>to figure out<span>?</span></h2><p>I’d be glad to talk about the problem, the constraints,<br class="desktop-break"> and where I could help.</p></div>
+        <div class="contact-actions">
+          <a class="contact-email" href="mailto:jeyboy1985@gmail.com">jeyboy1985@gmail.com <span aria-hidden="true">↗</span></a>
+          <div class="contact-links"><a href="https://linkedin.com/in/eugene-boiko" target="_blank" rel="noopener noreferrer">LinkedIn ↗<span class="sr-only"> (opens in a new tab)</span></a><a href="https://github.com/jeyboy" target="_blank" rel="noopener noreferrer">GitHub ↗<span class="sr-only"> (opens in a new tab)</span></a></div>
+          <div class="contact-downloads"><a href="assets/Yevhen_Boiko_CV.pdf" download>CV / PDF ↓</a><a href="assets/Yevhen_Boiko_CV.docx" download>CV / Word ↓</a></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><p>© <span id="year">2026</span> Yevhen Boiko <span class="footer-alias">· Eugene / jeyboy</span></p><a href="#top">Back to top ↑</a></div></footer>
+</body>
+</html>

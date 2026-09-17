@@ -1,0 +1,177 @@
+<section class="hero container" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <p class="eyebrow"><span class="location-dot" aria-hidden="true"></span> Ukraine · Working remotely</p>
+        <h1 id="hero-title">Yevhen<br> Boiko<span class="accent">.</span></h1>
+        <p class="hero-role">Solution Architect<br><span>Hands-on Engineering Leader</span></p>
+        <p class="hero-intro">I turn complex requirements into systems people can use. My work connects architecture, team leadership, and hands-on development — from the first conversation to delivery.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#work">Explore my work <span aria-hidden="true">↘</span></a>
+          <a class="button button-secondary" href="assets/Yevhen_Boiko_CV.pdf" download>Download CV <span class="button-note">PDF ↓</span></a>
+        </div>
+      </div>
+      <aside class="hero-index" aria-label="Selected areas of work">
+        <div class="index-heading"><span class="eyebrow">Selected systems</span><span class="index-cross" aria-hidden="true">+</span></div>
+        <a class="index-item" href="#scaleglide">
+          <span class="index-number">01</span>
+          <div><h2>AI orchestration</h2><p>Reusable workflows. Checked outputs.<br>Recovery at the request level.</p></div>
+          <span class="index-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="index-item" href="#cor">
+          <span class="index-number">02</span>
+          <div><h2>Business operations</h2><p>Bank integrations and finance workflows<br>with visible import decisions.</p></div>
+          <span class="index-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="index-item" href="#oxydial">
+          <span class="index-number">03</span>
+          <div><h2>Research software</h2><p>Measurement processing, numerical<br>validation, and cloud delivery.</p></div>
+          <span class="index-arrow" aria-hidden="true">↗</span>
+        </a>
+        <p class="index-footnote">Architecture decisions, the reasons behind them,<br>and what changed after implementation.</p>
+      </aside>
+      <div class="hero-bottom">
+        <p><strong>15+ years</strong><span>building software</span></p>
+        <p><strong>Design → delivery</strong><span>ownership across the lifecycle</span></p>
+        <p><strong>Python · TypeScript · Ruby</strong><span>AWS · GCP · PostgreSQL</span></p>
+      </div>
+    </section>
+<section class="work container section-space" id="work" aria-labelledby="work-title">
+      <div class="section-heading">
+        <p class="eyebrow">01 / Selected work</p>
+        <div><h2 id="work-title">The decisions behind<br>the software.</h2><p>Three projects where constraints shaped the architecture.</p></div>
+      </div>
+
+      <article class="case-study" id="scaleglide" aria-labelledby="scaleglide-title">
+        <div class="case-meta">
+          <span class="case-number" aria-hidden="true">01</span>
+          <h3 id="scaleglide-title">ScaleGlide AI</h3>
+          <p class="case-dates">Feb 2024 – Feb 2025</p>
+          <p>GlenFlow portfolio<br> Architecture &amp; team leadership</p>
+          <span class="status-tag">4 client pilots delivered</span>
+        </div>
+        <div class="case-content">
+          <p class="case-domain">AI workflow orchestration</p>
+          <h4>A new pilot should need<br> a new scenario.</h4>
+          <p class="case-lead">Each client needed a different chain of AI requests, checks, and outputs. I designed a Node.js DSL and built the complete JumpStart core so these workflows could be assembled from reusable operations.</p>
+          <div class="decision-grid">
+            <div><h5>The constraint</h5><p>Model responses were unpredictable. Client logic varied, and each interface belonged to its client. Reusing a previous pilot was rarely practical.</p></div>
+            <div><h5>The decision</h5><p>Move branching, parallel requests, validation, and formatting into an execution engine. Let a prompt engineer edit scenarios through the interface without a redeploy.</p></div>
+          </div>
+
+          {{WORKFLOW}}
+
+          <div class="outcome outcome-teal">
+            <div class="outcome-number">~4 <span>→</span> ~2 <small>weeks</small></div>
+            <p><strong>Typical delivery time for a working client pilot.</strong> Reusable orchestration reduced repeated implementation and debugging across four pilots. Timing is approximate.</p>
+          </div>
+          <details class="case-details">
+            <summary>More about the architecture and my role <span aria-hidden="true">+</span></summary>
+            <div class="details-body">
+              <p>I led a six-person team and worked across requirements, architecture, implementation, and integration. I designed the DSL and implemented the full JumpStart core underpinning GlenFlow Engine.</p>
+              <p>The engine used cross-model response validation and output-format checks. When a request failed, the scenario could retry, adjust model parameters, or use another model. Bounded, delayed retries and email status updates helped keep clients informed when processing could not finish immediately.</p>
+              <p>A dedicated prompt engineer wrote scenarios using the engine’s command reference, with my support throughout. The core handled branching, parallel work, intermediate checks, formatting, and JSON output; scenario changes no longer required writing and debugging that control flow again.</p>
+            </div>
+          </details>
+          <ul class="tech-list" aria-label="ScaleGlide technologies"><li>Node.js</li><li>AWS Lambda</li><li>OpenAI</li><li>Anthropic</li><li>AWS Bedrock</li></ul>
+          <a class="text-link case-read" href="scaleglide.html">Read the full ScaleGlide case study <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+
+      <article class="case-study" id="cor" aria-labelledby="cor-title">
+        <div class="case-meta">
+          <span class="case-number" aria-hidden="true">02</span>
+          <h3 id="cor-title">COR-Software</h3>
+          <p class="case-dates">Mar 2025 – Present</p>
+          <p>Fractional · Remote<br> Solution Architect &amp; Lead Engineer</p>
+          <span class="status-tag">Private beta</span>
+        </div>
+        <div class="case-content">
+          <p class="case-domain">ERP &amp; finance</p>
+          <h4>Automate the routine.<br> Make import decisions visible.</h4>
+          <p class="case-lead">As the primary application engineer, I’m building a finance and ERP platform for multiple businesses — from business analysis and architecture to implementation, testing, and release validation.</p>
+          <div class="decision-grid">
+            <div><h5>The constraint</h5><p>Bank formats and identifiers differ. Daily statement downloads take time, while beta users need to see how incoming records will be parsed and classified.</p></div>
+            <div><h5>The decision</h5><p>Use bank APIs where available and separate bank-specific parsing from shared finance workflows. Keep preview/commit imports for validation and as a fallback.</p></div>
+          </div>
+          {{IMPORT_MODEL}}
+          <div class="case-result"><span class="result-marker" aria-hidden="true">↗</span><p><strong>Fewer routine manual steps, with a reviewable fallback.</strong> API integrations remove daily statement downloads where supported. The private beta serves multiple businesses and processes hundreds of monthly transactions.</p></div>
+          <details class="case-details">
+            <summary>More about the architecture and my role <span aria-hidden="true">+</span></summary>
+            <div class="details-body">
+              <p>The application covers multi-company cash-basis accounting, accounts payable and receivable, inventory, fleet and fuel, assets, CRM, and document workflows. Access rules are enforced on the server, with audit trails and recovery support.</p>
+              <p>Each bank has its own parsing schema. Duplicate detection uses a payment’s unique identifier when available, or a configured combination of fields when it is not. Description rules help assign categories automatically.</p>
+              <p>The preview shows parsed values, categories, account assignments, duplicate matches, and records that will be restored from deleted entries. This helps us validate behavior during beta and keeps a usable fallback when automatic retrieval is unavailable.</p>
+              <p>I own the application architecture and implementation, work with DevOps, mentor a trainee, and maintain automated checks with Playwright and unittest.</p>
+            </div>
+          </details>
+          <ul class="tech-list" aria-label="COR technologies"><li>Python</li><li>FastAPI</li><li>PostgreSQL</li><li>SQLAlchemy</li><li>React</li><li>Playwright</li></ul>
+          <a class="text-link case-read" href="cor-finance.html">Read the full COR-Software case study <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+
+      <article class="case-study" id="oxydial" aria-labelledby="oxydial-title">
+        <div class="case-meta">
+          <span class="case-number" aria-hidden="true">03</span>
+          <h3 id="oxydial-title">OxyDial</h3>
+          <p class="case-dates">Mar 2023 – Nov 2024</p>
+          <p>GlenFlow portfolio<br> Architecture &amp; team leadership</p>
+          <span class="status-tag">Research &amp; validation</span>
+        </div>
+        <div class="case-content">
+          <p class="case-domain">Measurement processing &amp; cloud SaaS</p>
+          <h4>Better measurements need<br> a way to check the result.</h4>
+          <p class="case-lead">I led a six-person engineering team and owned the architecture and delivery of a cloud platform for oxygen–hemoglobin equilibrium curve testing, including work on numerical processing.</p>
+          <div class="decision-grid">
+            <div><h5>The constraint</h5><p>Measurement noise and reagent variation affected the resulting curve. Processing needed to improve accuracy while keeping calculation time practical.</p></div>
+            <div><h5>The decision</h5><p>Reduce noise, account for reagent coefficients, and tune iteration counts. Investigate fitting methods and check the results against independent references.</p></div>
+          </div>
+          <div class="research-method" aria-label="Numerical research and validation approach">
+            <div class="method-step"><span class="method-label">Processing</span><h5>Smooth &amp; correct</h5><p>Reduce measurement noise and incorporate reagent coefficients.</p></div>
+            <div class="method-step"><span class="method-label">Investigation</span><h5>Reconstruct the curve</h5><p>Explore Levenberg–Marquardt fitting toward a sigmoidal representation.</p></div>
+            <div class="method-step"><span class="method-label">Validation</span><h5>Compare P50 / P90</h5><p>Check deviations against manual calculations, reference results, and other software.</p></div>
+          </div>
+          <div class="case-result"><span class="result-marker" aria-hidden="true">↗</span><p><strong>Improved curve accuracy and faster calculation.</strong> Numerical work reduced errors and refined iteration counts. The web platform was deployed in the company’s research and validation environment.</p></div>
+          <details class="case-details">
+            <summary>More about the research and delivery <span aria-hidden="true">+</span></summary>
+            <div class="details-body">
+              <p>I investigated Levenberg–Marquardt fitting as part of reconstructing a sigmoidal curve from smoothed measurements. This was research into a fitting approach. We used visual overlays during investigation and checked deviations in calculated P50 and P90 against manual calculations, reference results, and other software.</p>
+              <p>The platform also included automated device-data ingestion, cloud storage and backup, analytical dashboards, reports, CSV exports, audit trails, and remote research collaboration.</p>
+              <p>Its web and numerical-processing components contributed to a broader medical measurement process for which the company filed a patent application.</p>
+            </div>
+          </details>
+          <ul class="tech-list" aria-label="OxyDial focus areas"><li>Cloud SaaS</li><li>Device data</li><li>Numerical processing</li><li>P50 / P90 validation</li></ul>
+          <a class="text-link case-read" href="oxydial.html">Read the full OxyDial case study <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+    </section>
+<section class="experience-section section-space" id="experience" aria-labelledby="experience-title">
+      <div class="container">
+        <div class="section-heading"><p class="eyebrow">02 / Experience</p><div><h2 id="experience-title">A career close<br>to the implementation.</h2><p>Architecture and leadership built on years of shipping and maintaining software.</p></div></div>
+        <div class="experience-layout">
+          <div class="experience-intro">
+            <h3>From Rails applications<br>to cloud platforms.</h3>
+            <p>I work across backend, frontend, integrations, and delivery. Alongside building new systems, I’ve spent years improving existing products and resolving production issues.</p>
+            <a class="text-link" href="experience.html">Explore my full experience <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="timeline">
+            <div class="timeline-item"><p class="timeline-date">2025 – Present</p><div><h3>COR-Software</h3><p class="timeline-role">Solution Architect &amp; Lead Full-Stack Engineer</p><p>Fractional role. Primary application engineer for a greenfield ERP and finance platform.</p></div></div>
+            <div class="timeline-item"><p class="timeline-date">2021 – Present</p><div><h3>GlenFlow</h3><p class="timeline-role">Engineering leadership → Senior Software Engineer</p><p>Head of Engineering / Director of Technology until July 2024; Senior Software Engineer since August 2024. Portfolio work includes ScaleGlide AI, OxyDial, and CmySkills.</p><p class="timeline-note">The leadership business line closed in July 2024. Employment continues, currently without an active project assignment.</p></div></div>
+            <div class="timeline-item"><p class="timeline-date">2024 – 2025</p><div><h3>Wingspan</h3><p class="timeline-role">Senior Full-Stack Engineer · Contract</p><p>Production fixes and improvements in contractor and finance workflows, including gRPC integrations and server-side PDF generation.</p></div></div>
+            <div class="timeline-item"><p class="timeline-date">2019 – 2021</p><div><h3>Livegenic</h3><p class="timeline-role">Full-Stack Software Engineer · Contract</p><p>Rails and React development for an InsurTech platform covering live video claims inspection, documents, and communication.</p></div></div>
+            <div class="timeline-item"><p class="timeline-date">2013 – 2019</p><div><h3>Independent work</h3><p class="timeline-role">Upwork &amp; direct clients</p><p>Custom MQTT telemetry and Ruby device communications for MonitorHealth; e-commerce development and integrations for RebelsMarket.</p></div></div>
+            <div class="timeline-item"><p class="timeline-date">2010 – 2013</p><div><h3>FaceIT</h3><p class="timeline-role">Ruby on Rails Developer</p><p>Application development, query optimization, legacy improvements, and production support.</p></div></div>
+          </div>
+        </div>
+        <div class="toolbox"><p class="eyebrow">Tools I work with</p><div><span>Python / FastAPI</span><span>TypeScript / Node.js</span><span>Ruby / Rails</span><span>React</span><span>AWS / GCP</span><span>PostgreSQL</span><span>REST / gRPC</span><span>Playwright / Jest</span></div></div>
+      </div>
+    </section>
+<section class="projects container section-space" id="projects" aria-labelledby="projects-title">
+      <div class="section-heading"><p class="eyebrow">03 / Independent work</p><div><h2 id="projects-title">Things I’ve built<br>and keep exploring.</h2></div></div>
+      <div class="project-list">
+        <article class="project-item project-featured"><div class="project-kind">Private project<br><span>In development</span></div><div><h3>Collaborative Diagram Builder</h3><p>A web diagramming platform with real-time collaboration, concurrent-state resolution, and single or chained object animations.</p><a class="text-link" href="mailto:jeyboy1985@gmail.com?subject=Collaborative%20Diagram%20Builder%20demo">Ask for a demo or architecture walkthrough <span aria-hidden="true">↗</span></a></div></article>
+        <article class="project-item"><div class="project-kind">Ruby library</div><div><h3>ActionmailerX509</h3><p>X.509-signed and encrypted email for Ruby applications.</p></div></article>
+        <article class="project-item"><div class="project-kind">Ruby library</div><div><h3>NPPES</h3><p>A Ruby library for integration with the NPPES external API.</p></div></article>
+        <article class="project-item"><div class="project-kind">Desktop application</div><div><h3>Playo3</h3><p>A cross-platform media application built with C++, Qt, and FFmpeg, with global hotkeys and custom data-source integrations.</p></div></article>
+      </div>
+      <a class="text-link projects-github" href="https://github.com/jeyboy" target="_blank" rel="noopener noreferrer">Explore my GitHub profile <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+      <div class="background-note"><div><span class="eyebrow">Education</span><p>Master’s in Software Systems</p><span>Zaporizhzhya State Engineering Academy, Ukraine</span></div><div><span class="eyebrow">Languages</span><p>English · Upper-Intermediate (B2)</p><span>Ukrainian and Russian · Native</span></div></div>
+    </section>

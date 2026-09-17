@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8f7">
+  <title>COR-Software — Finance &amp; ERP Architecture | Yevhen Boiko</title>
+  <meta name="description" content="Architecture and delivery of a finance and ERP platform: bank integrations, parsing schemas, duplicate detection, and preview/commit imports.">
+  <link rel="canonical" href="https://jeyboy.github.io/cor-finance.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="COR-Software — Finance &amp; ERP Architecture | Yevhen Boiko">
+  <meta property="og:description" content="Architecture and delivery of a finance and ERP platform: bank integrations, parsing schemas, duplicate detection, and preview/commit imports.">
+  <meta property="og:url" content="https://jeyboy.github.io/cor-finance.html">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2319364b'/%3E%3Cpath d='M13 48h38' stroke='%2359d0ba' stroke-width='4'/%3E%3Ctext x='32' y='38' text-anchor='middle' font-family='Arial,sans-serif' font-size='25' font-weight='700' fill='white'%3EYB%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="pages.css">
+  <script src="script.js" defer></script>
+  
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="top"><div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="Yevhen Boiko, home"><span class="brand-mark" aria-hidden="true">yb<span>.</span></span><span class="brand-name">Yevhen Boiko</span></a>
+    <nav aria-label="Main navigation"><a href="index.html#work" class="is-active">Work</a><a href="experience.html">Experience</a><a href="#contact">Contact <span aria-hidden="true">↗</span></a></nav>
+  </div></header>
+  <main id="main" tabindex="-1">
+    <section class="page-hero container" aria-labelledby="page-title">
+  <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="index.html#work">Selected work</a><span aria-hidden="true">/</span><span aria-current="page">COR-Software</span></nav>
+  <p class="eyebrow">Case study 02 / ERP &amp; finance</p>
+  <h1 id="page-title">Finance workflows with<br> visible import decisions<span class="accent">.</span></h1>
+  <p class="page-intro">A greenfield ERP and finance platform for multiple businesses. I own the application work from business analysis and architecture through implementation, automated testing, and release validation.</p>
+  <dl class="project-facts"><div><dt>My role</dt><dd>Solution Architect<br> &amp; primary application engineer</dd></div><div><dt>Stage</dt><dd>Private beta<br> Multiple businesses</dd></div><div><dt>Period</dt><dd>Mar 2025 – Present<br> Fractional · Remote</dd></div></dl>
+</section>
+<div class="container article-layout">
+  <aside class="article-nav"><p class="eyebrow">In this case</p><nav aria-label="Case study sections"><a href="#context">01 / Business context</a><a href="#imports">02 / Import architecture</a><a href="#preview">03 / Preview &amp; fallback</a><a href="#ownership">04 / Ownership &amp; outcome</a></nav><a class="text-link" href="assets/Yevhen_Boiko_CV.pdf" download>Download CV ↓</a></aside>
+  <div class="article-content">
+    <section id="context" class="article-section" aria-labelledby="context-title"><p class="case-domain">Business context</p><h2 id="context-title">One application, several operational workflows.</h2><p>The platform brings together multi-company cash-basis accounting, accounts payable and receivable, inventory, fleet and fuel, assets, CRM, and document workflows. It also supports employee military records using immutable, versioned data.</p><p>As the primary application engineer, I translate business requirements into the data model, APIs, access rules, and interface. The application uses Python and FastAPI with PostgreSQL, SQLAlchemy, and Alembic, alongside React and TanStack.</p><div class="scope-grid"><div><h3>Finance</h3><p>Cash-basis accounting, AP/AR, bank statements, transaction categories.</p></div><div><h3>Operations</h3><p>Inventory, fleet and fuel, asset records, CRM, and documents.</p></div><div><h3>Control</h3><p>Server-enforced access, audit trails, recovery, and versioned records.</p></div></div></section>
+
+    <section id="imports" class="article-section" aria-labelledby="imports-title"><p class="case-domain">Bank integration</p><h2 id="imports-title">Handle each bank’s differences explicitly.</h2><p>Before automation, an employee had to visit each bank’s application and download statement files as part of the daily routine. We integrated PUMB, PrivatBank, and Monobank and used API retrieval wherever the bank made it available.</p><p>The important constraint was that banks do not provide identical formats or identifiers. I separated bank-specific parsing schemas from the shared finance workflows.</p><div class="decision-table-wrap"><table class="decision-table"><caption>Bank data decisions</caption><thead><tr><th scope="col">Input condition</th><th scope="col">How it is handled</th></tr></thead><tbody><tr><th scope="row">A native payment identifier is available</th><td>Use that identifier to detect duplicate transactions.</td></tr><tr><th scope="row">The bank does not supply that identifier</th><td>Use a configured combination of fields in the bank’s parsing schema.</td></tr><tr><th scope="row">Descriptions contain useful classification data</th><td>Apply configurable parsing rules to assign categories.</td></tr><tr><th scope="row">Automatic statement retrieval is unavailable</th><td>Retain statement-file import as a fallback.</td></tr></tbody></table></div><p>This approach makes differences between banks part of an explicit schema. It also lets description rules be refined as we encounter new transaction patterns.</p></section>
+
+    <section id="preview" class="article-section" aria-labelledby="preview-title"><p class="case-domain">Validation before commit</p><h2 id="preview-title">Show what the import will do.</h2><p>During beta, users need to understand how the system interpreted their data. The preview exposes the planned result before an import is committed, so incorrect parsing or classification can be noticed at that stage.</p>
+      <div class="import-model" aria-label="Bank import architecture">
+            <div class="import-head"><span class="mono">02 / import decisions</span><span class="small-label">PUMB · PrivatBank · Monobank</span></div>
+            <div class="import-row"><span class="import-index">01</span><h5>Retrieve</h5><p>Bank API, with statement files as a fallback</p></div>
+            <div class="import-row"><span class="import-index">02</span><h5>Identify</h5><p>Native payment ID or a bank-specific combination of fields</p></div>
+            <div class="import-row"><span class="import-index">03</span><h5>Classify</h5><p>Configurable rules for transaction descriptions</p></div>
+            <div class="import-preview"><div><strong>Preview before commit</strong><span>Available for beta validation and fallback imports</span></div><ul><li>Parsing &amp; categories</li><li>Duplicate matches</li><li>Target accounts</li><li>Record restorations</li></ul></div>
+          </div>
+
+      <ul class="prose-list"><li><strong>Parsed values and categories:</strong> check how source data was read and where transactions were classified.</li><li><strong>Duplicate matches:</strong> see which incoming records match existing transactions.</li><li><strong>Target accounts:</strong> see where the imported payments will be assigned.</li><li><strong>Planned restorations:</strong> identify records that will be restored from previously deleted entries.</li></ul><div class="architect-note"><span class="eyebrow">Why the manual path remains</span><p>The preview/commit flow supports beta testing and serves as a fallback when automatic retrieval is unavailable. API integrations still remove routine downloads wherever they are supported.</p></div></section>
+
+    <section id="ownership" class="article-section" aria-labelledby="ownership-title"><p class="case-domain">Delivery &amp; ownership</p><h2 id="ownership-title">Architecture through release validation.</h2><p>I own the application architecture and implementation, including versioned APIs, server-side permissions, generated documents, and data workflows. I work with DevOps and mentor a trainee while maintaining automated checks with Playwright and unittest.</p><div class="outcome outcome-teal"><div class="outcome-label">Private<br> beta</div><p><strong>Multiple businesses and hundreds of monthly transactions.</strong> The platform is being validated with actual business workflows at this stage.</p></div><p>The practical improvement is straightforward: employees no longer need to download statements from every supported bank each day. Configurable rules also reduce repeated manual categorization. The preview remains available to inspect how data will be handled.</p><ul class="tech-list" aria-label="Technologies"><li>Python</li><li>FastAPI</li><li>PostgreSQL</li><li>SQLAlchemy</li><li>Alembic</li><li>React</li><li>TanStack</li><li>Playwright</li><li>unittest</li></ul></section>
+    <nav class="next-case" aria-label="Continue exploring"><a href="scaleglide.html"><span>Previous case study</span><strong>← ScaleGlide AI</strong></a><a href="oxydial.html"><span>Next case study</span><strong>OxyDial →</strong></a></nav>
+  </div>
+</div>
+
+    <section class="contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="container contact-inner">
+        <div><p class="eyebrow">04 / Get in touch</p><h2 id="contact-title">Have a system<br>to figure out<span>?</span></h2><p>I’d be glad to talk about the problem, the constraints,<br class="desktop-break"> and where I could help.</p></div>
+        <div class="contact-actions">
+          <a class="contact-email" href="mailto:jeyboy1985@gmail.com">jeyboy1985@gmail.com <span aria-hidden="true">↗</span></a>
+          <div class="contact-links"><a href="https://linkedin.com/in/eugene-boiko" target="_blank" rel="noopener noreferrer">LinkedIn ↗<span class="sr-only"> (opens in a new tab)</span></a><a href="https://github.com/jeyboy" target="_blank" rel="noopener noreferrer">GitHub ↗<span class="sr-only"> (opens in a new tab)</span></a></div>
+          <div class="contact-downloads"><a href="assets/Yevhen_Boiko_CV.pdf" download>CV / PDF ↓</a><a href="assets/Yevhen_Boiko_CV.docx" download>CV / Word ↓</a></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><p>© <span id="year">2026</span> Yevhen Boiko <span class="footer-alias">· Eugene / jeyboy</span></p><a href="#top">Back to top ↑</a></div></footer>
+</body>
+</html>
